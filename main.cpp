@@ -78,9 +78,14 @@ angle :: angle(double x) {double z, y;
 }
 angle aduna(angle a1, angle a2){
     angle a3;
-    a3.setGrade(a1.getGrade()+a2.getGrade());
-    a3.setMinute(a1.getMinute()+a2.getMinute());
-    a3.setSecunde(a1.getSecunde()+a2.getSecunde());
+    int aux;
+    aux = a1.getSecunde() + a2.getSecunde();
+    a3.setSecunde(aux%60);
+    aux = a1.getMinute()+a2.getMinute()+ aux / 60 ;
+    a3.setMinute(aux%60);
+
+    a3.setGrade(a1.getGrade()+a2.getGrade() + aux / 60);
+
 
     return a3;
 }
@@ -103,7 +108,7 @@ class Triunghi{
 private:
     angle a, b, c;
 public:
-    Triunghi(const angle &a, const angle &b, const angle &c) : a(a), b(b), c(c) {}
+    Triunghi(const angle &a, const angle &b, const angle &c) : a(a), b(b), c(c) {} // am pp ca se primeste input valid pt un triunghi
 
     void unghiminim_afisare(){
         minim(minim(a, b),c).print();
